@@ -156,15 +156,48 @@ class ConsistentHashRing {
         System.out.println("The key '" + key + "' is mapped to node: " + node);
     }
 }
-
-
 ```
+### [No. 5] What is a MESSAGE QUEUE and Where is it used?
+
+---
+https://www.youtube.com/watch?v=oUJbuFMyBDk
+
+RabbitMQ, JMS, ZeroMQ
+
+### [No. 6] What is a MICROSERVICE ARCHITECTURE and what are its advantages?
+
+---
+https://www.youtube.com/watch?v=qYhRvH9tJKw
+
+MICROSERVICE is a single business unit.
+Monolith has multiple business unit in the same service.
+
+Monolith advantages: 
+1. small and cohesive team
+2. lesser moving parts deployments are easy 
+3. less code duplicacy
+4. faster, no network/rpc calls 
+
+Monolith Disadvantages:
+1. whole deployments required for every change
+2. tough to understand the whole flow
+3. tight-coupling
+
+Microservice advantages:
+1. easy to scale system
+2. easy to start work from a microservice (a small business unit context needed)
+3. parallel development easy, loose coupling is there that's y. 
+4. lesser parts are hidden while deployment
+
+Microservice Disadvantages:
+1. tough to design and maintain all Microservice at once.
+2. if two Microservices always talking to each other, its better to keep them in one.
+
+### [No. 7] What is DATABASE SHARDING?
+
+---
 
 
-
-
- 
- 
 
 
 
