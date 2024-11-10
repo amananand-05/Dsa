@@ -112,14 +112,59 @@ class Solution {
 
 ```
 
-### 4. []
+### 4. [80. Remove Duplicates from Sorted Array II] https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description
 ```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = 2;
+        int n = nums.length;
+        if (n < 3)
+            return n;
+        for (int i = 2; i < n; i++)
+            if (nums[i] != nums[k - 2])
+                nums[k++] = nums[i];
+        return k;
+    }
+}
+```
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = -1;
+        int n = nums.length;
+        int[] temp = new int[nums.length];
+        if (n < 3)
+            return n;
+        for (int i = 2; i < nums.length; i++) {
+            if (!(nums[i] != nums[i - 1]) &&
+                    !(nums[i] == nums[i - 1] && nums[i - 1] != nums[i - 2]))
+                temp[i] = -1;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (temp[i] != -1)
+                nums[++k] = nums[i];
+        }
+        return k + 1;
+    }
+}
 
 ```
 
-### 5. []
+### 5. [169. Majority Element] https://leetcode.com/problems/majority-element/description
 ```java
-
+// Boyer-Moore Voting Algorithm:
+class Solution {
+    public int majorityElement(int[] nums) {
+        int majorityElement = nums[0], count  = 0;
+        for(int num : nums){
+            if(count == 0)
+               majorityElement = num; 
+            count += num == majorityElement ? 1 : -1;
+        }
+        return majorityElement;
+    }
+}
+// The algorithm states: If the same value keeps coming, the count will increase. Different values will decrease the accumulated count, effectively neutralizing it. When the count reaches zero, we select a new majority element from that point onwards.
 ```
 
 ### 6. []
