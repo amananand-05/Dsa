@@ -167,9 +167,27 @@ class Solution {
 // The algorithm states: If the same value keeps coming, the count will increase. Different values will decrease the accumulated count, effectively neutralizing it. When the count reaches zero, we select a new majority element from that point onwards.
 ```
 
-### 6. []
+### 6. [189. Rotate Array] https://leetcode.com/problems/rotate-array/description
 ```java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n; // it will calculate the actual shift
+        reverse(nums, 0, n - 1); // it will move k element from right end to left
+        reverse(nums, 0, k - 1); // fix the order for first k element
+        reverse(nums, k, n - 1); // fix the order for last l-k element
+    }
 
+    public void reverse(int[] nums, int l, int r) {
+        while (l < r) {
+            nums[r] += nums[l];
+            nums[l] = nums[r] - nums[l];
+            nums[r] -= nums[l];
+            l++;
+            r--;
+        }
+    }
+}
 ```
 
 ### 7. []
