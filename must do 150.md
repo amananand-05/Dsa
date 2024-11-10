@@ -1,7 +1,7 @@
 # Top Interview 150 LC
 
 
-## Section -  Array / String
+## Section A. Array / String
 ### 1. [88. Merge Sorted Array] https://leetcode.com/problems/merge-sorted-array/description/
 ```java
 class Solution {
