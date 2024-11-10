@@ -92,8 +92,23 @@ class Solution {
 }
 ```
 
-### 3. []
+### 3. [26. Remove Duplicates from Sorted Array] https://leetcode.com/problems/remove-duplicates-from-sorted-array/description
 ```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = 0;
+        int n = nums.length;
+        if (n < 2)
+            return n;
+        for (int i = 1; i < n; i++) {
+            if (nums[i] != nums[i - 1]) {
+                k++;
+                nums[k] = nums[i];
+            }
+        }
+        return k + 1;
+    }
+}
 
 ```
 
