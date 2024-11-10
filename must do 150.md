@@ -190,9 +190,20 @@ class Solution {
 }
 ```
 
-### 7. []
+### 7. [121. Best Time to Buy and Sell Stock] https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description
 ```java
-
+class Solution {
+    public int maxProfit(int[] prices) {
+        int min = Integer.MAX_VALUE, res = 0;
+        for (int price : prices) {
+            min = Math.min(min, price);
+            res = Math.max(res, price - min);
+        }
+        return res;
+    }
+}
+// at any moment keep track of min form left to present index
+// and result will be max of all (present value - min)
 ```
 
 ### 8. []
