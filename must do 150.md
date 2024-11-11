@@ -410,7 +410,7 @@ class Solution {
             sumGas+=gas[i];
             sumCost+=cost[i];
         }
-        if(sumGas<sumCost) return -1;
+        if(sumGas<sumCost) return -1; //means solution does not exist, circle cannot be covered.
         int currGas = 0;
         int startIndex = 0;
         for(int i=0;i<n;i++){
