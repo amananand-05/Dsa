@@ -220,14 +220,43 @@ class Solution {
 }
 ```
 
-### 9. []
+### 9. [55. Jump Game] https://leetcode.com/problems/jump-game/description
 ```java
-
+class Solution {
+    public boolean canJump(int[] nums) {
+        int maxReachIndex = 0;
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if ((maxReachIndex == i && nums[i] == 0) && i != n - 1)
+                return false;
+            maxReachIndex = Math.max(maxReachIndex, i + nums[i]);
+        }
+        return true;
+    }
+}
 ```
 
-### 10. []
+### 10. [45. Jump Game II] https://leetcode.com/problems/jump-game-ii/description
 ```java
-
+class Solution {
+    public int jump(int[] nums) {
+        int maxReachIndex = 0;
+        int n = nums.length;
+        int currEndIndex = 0;
+        int jumps = 0;
+        for(int i=0;i<n-1;i++){
+            maxReachIndex = Math.max(maxReachIndex, i+nums[i]);
+            if(i == currEndIndex){
+                jumps++; // it doesnot mean jump is made exactly at currEndIndex
+                // but jump is made in between range of the last jump index and currEndIndex
+                currEndIndex = maxReachIndex;
+                if(currEndIndex >= n-1)
+                    break;
+            }
+        }
+        return jumps;
+    }
+}
 ```
 
 ### 11. []
