@@ -399,9 +399,30 @@ class Solution {
 }
 ```
 
-### 14. []
+### 14. [134. Gas Station] https://leetcode.com/problems/gas-station/description
 ```java
-
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.length;
+        int sumGas = 0;
+        int sumCost = 0;
+        for(int i=0;i<n;i++){
+            sumGas+=gas[i];
+            sumCost+=cost[i];
+        }
+        if(sumGas<sumCost) return -1;
+        int currGas = 0;
+        int startIndex = 0;
+        for(int i=0;i<n;i++){
+            currGas += gas[i] - cost[i];
+            if(currGas<0){
+                currGas = 0;
+                startIndex = i+1;
+            }
+        }
+        return startIndex;
+    }
+}
 ```
 
 ### 15. []
