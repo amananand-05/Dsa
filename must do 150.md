@@ -263,6 +263,38 @@ class Solution {
 ```java
 class Solution {
     public int hIndex(int[] citations) {
+        int n = citations.length;
+        int[] count = new int[n + 1];
+
+        // Step 1: Fill the count array
+        for (int citation : citations) {
+            if (citation >= n) {
+                count[n]++;
+            } else {
+                count[citation]++;
+            }
+        }
+
+        // example: 
+        // [3,0,6,1,5]      -> citations
+        // [1,1,0,1,0,2]    -> count array values
+        // [0,1,2,3,4,5]    -> count array indexes
+
+        // Step 2: Find the H-Index
+        int cumulative = 0;
+        for (int i = n; i >= 0; i--) {
+            cumulative += count[i];
+            if (cumulative >= i) {
+                return i;
+            }
+        }
+        return 0;
+    }
+}
+```
+```java
+class Solution {
+    public int hIndex(int[] citations) {
         Arrays.sort(citations);
         int n = citations.length;
         for(int i=0;i<n;i++){
