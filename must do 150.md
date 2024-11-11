@@ -425,8 +425,50 @@ class Solution {
 }
 ```
 
-### 15. []
+### 15. [135. Candy] https://leetcode.com/problems/candy/description
 ```java
+class Solution {
+    public int candy(int[] ratings) {
+        int n = ratings.length;
+        int result = n;
+        int[] candies = new int[n];
+        for (int i = 1; i < n; i++)
+            if (ratings[i - 1] < ratings[i])
+                candies[i] = candies[i - 1]+1;
+        for (int i = n-2; i >= 0; i--)
+            if (ratings[i] > ratings[i + 1])
+                candies[i] = Math.max(candies[i + 1] + 1, candies[i]);
+        for (int i : candies)
+            result += i;
+        return result;
+    }
+}
+```
+```java
+class Solution {
+    public int candy(int[] ratings) {
+        int n = ratings.length;
+        int result = n;
+        int up = 0, down = 0, peak = 0;
+
+        for (int i = 1; i < n; i++) {
+            if (ratings[i] > ratings[i - 1]) {
+                up++;
+                peak = up;
+                down = 0;
+                result += up;
+            } else if (ratings[i] < ratings[i - 1]) {
+                down++;
+                up = 0;
+                result += down;
+                if (down > peak) result++;
+            } else {
+                up = down = peak = 0;
+            }
+        }
+        return result;
+    }
+}
 
 ```
 
