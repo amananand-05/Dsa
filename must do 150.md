@@ -576,9 +576,24 @@ class Solution {
 }
 ```
 
-### 19. []
+### 19. [58. Length of Last Word] https://leetcode.com/problems/length-of-last-word/description
 ```java
-
+class Solution {
+    public int lengthOfLastWord(String s) {
+        boolean alphabetAnCountered = false;
+        int n = s.length();
+        int result = 0;
+        for (int i = n - 1; i >= 0; i--) {
+            char ch = s.charAt(i);
+            if (ch != ' ') {
+                alphabetAnCountered = true;
+                result++;
+            } else if (alphabetAnCountered)
+                return result;
+        }
+        return result;
+    }
+}
 ```
 
 ### 20. []
