@@ -472,9 +472,60 @@ class Solution {
 
 ```
 
-### 16. []
+### 16. [42. Trapping Rain Water] https://leetcode.com/problems/trapping-rain-water/description
 ```java
+class Solution {
+    public int trap(int[] height) {
+        int left = 0, right = height.length - 1;
+        int leftMax = 0, rightMax = 0;
+        int result = 0;
 
+        while (left <= right) {
+            if (height[left] <= height[right]) {
+                if (height[left] >= leftMax) {
+                    leftMax = height[left];
+                } else {
+                    result += leftMax - height[left];
+                }
+                left++;
+            } else {
+                if (height[right] >= rightMax) {
+                    rightMax = height[right];
+                } else {
+                    result += rightMax - height[right];
+                }
+                right--;
+            }
+        }
+        return result;
+    }
+}
+
+```
+```java
+class Solution {
+    public int trap(int[] height) {
+        int n = height.length;
+        int[][] dbref = new int[n][2];
+        for(int i = 0;i<n;i++)
+            if(i==0)
+                dbref[i][0] = height[i];
+            else
+                dbref[i][0] = Math.max(dbref[i-1][0],height[i]);
+
+        for(int i = n-1; i>=0; i--)
+            if(i==n-1)
+                dbref[i][1] = height[i];
+            else
+                dbref[i][1] = Math.max(dbref[i+1][1],height[i]);
+                
+        int result = 0;
+        for(int i = n-1; i>=0; i--)
+            result += Math.min(dbref[i][1],dbref[i][0])-height[i];
+        return result;
+        
+    }
+}
 ```
 
 ### 17. []
