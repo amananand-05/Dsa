@@ -771,9 +771,31 @@ class Solution {
 }
 ```
 
-### 25. []
+### 25. [125. Valid Palindrome] https://leetcode.com/problems/valid-palindrome/description
 ```java
-
+class Solution {
+    public boolean isPalindrome(String s) {
+        StringBuilder sb  = new StringBuilder();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(
+                (97 <= ch && ch<= 97+25) ||
+                (65 <= ch && ch<= 65+25) ||
+                (48 <= ch && ch<= 48+9)
+                ){
+                    sb.append((65 <= ch && ch<= 65+25)?(char)(ch+32):ch);
+                }
+        }
+        int l = 0,r = sb.length()-1;
+        while(l<r){
+            if(sb.charAt(l) != sb.charAt(r))
+                return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
 ```
 
 ### 26. []
