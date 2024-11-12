@@ -19,6 +19,7 @@ double randomValue = Math.random(); // the does the same thing as above
 double randomValue = rand.nextInt(x); //  random int value between [0,x)
 
 Arrays.fill(candies,1);
+" ".repeat(n);
 
 ```
 

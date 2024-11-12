@@ -720,9 +720,55 @@ class Solution {
 }
 ```
 
-### 24. []
+### 24. [68. Text Justification] https://leetcode.com/problems/text-justification/description
 ```java
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        int startI = 0,lastI = 0;
+        int dataLength = 0; 
+        List<String> result = new ArrayList<>();
+        for(int i=0;i<words.length;i++){
+            dataLength += words[i].length()+1;
+            if(dataLength - 1 <= maxWidth)
+                lastI = i;
+            else{
+                result.add(getLineString(words,startI,lastI,maxWidth));
+                dataLength = words[i].length()+1;
+                startI = lastI = i;
+            }
+        }
+        result.add(getLineString(words,startI,lastI,maxWidth));
+        return result;
+        
+    }
+    public String getLineString(String[] words,int startI, int lastI, int maxWidth){
+        StringBuilder sb = new StringBuilder();
+        int spaces = maxWidth;
+        int spacesIntervalCount = lastI-startI;
+        for(int i=startI; i<=lastI; i++)
+            spaces-=words[i].length();
 
+        if(words.length-1 == lastI){
+            for(int i=startI; i<=lastI; i++){
+                sb.append(words[i]+(i != lastI ? " " : " ".repeat(spaces)));
+                spaces--;
+            }
+            return sb.toString().substring(0,sb.length());
+        }
+
+        if(startI - lastI == 0)
+            return words[startI]+" ".repeat(spaces);
+
+        
+        for(int i=startI; i<=lastI; i++){
+            int temp = spacesIntervalCount > 0 ? (int)Math.ceil((double)spaces/spacesIntervalCount) : 0;
+            sb.append(words[i]+" ".repeat(temp));
+            spaces -= temp;
+            spacesIntervalCount--;
+        }
+        return sb.toString();
+    }
+}
 ```
 
 ### 25. []
