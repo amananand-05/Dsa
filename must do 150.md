@@ -663,8 +663,47 @@ class Solution {
 // return :)
 ```
 
-### 22. []
+### 22. [6. Zigzag Conversion] https://leetcode.com/problems/zigzag-conversion/description
 ```java
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows == 1 || numRows >= s.length()) {
+            return s;
+        }
+
+        // Initialize StringBuilder array
+        StringBuilder[] sbArr = new StringBuilder[numRows];
+        for (int i = 0; i < numRows; i++) {
+            sbArr[i] = new StringBuilder();
+        }
+
+        int index = 0;
+        boolean increase = true;
+
+        // Traverse the string
+        for (char c : s.toCharArray()) {
+            sbArr[index].append(c);
+
+            // Change direction when reaching top or bottom
+            if (index == 0) {
+                increase = true;
+            } else if (index == numRows - 1) {
+                increase = false;
+            }
+
+            // Update index based on direction
+            index += increase ? 1 : -1;
+        }
+
+        // Concatenate all rows
+        StringBuilder res = new StringBuilder();
+        for (StringBuilder sb : sbArr) {
+            res.append(sb);
+        }
+
+        return res.toString();
+    }
+}
 
 ```
 
