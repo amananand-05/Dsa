@@ -775,6 +775,36 @@ class Solution {
 ```java
 class Solution {
     public boolean isPalindrome(String s) {
+        int l=0,r=s.length()-1;
+        while(l<r){
+            if( legit(s.charAt(l)) > 0 && 
+                legit(s.charAt(r)) > 0 &&
+                legit(s.charAt(l)) != legit(s.charAt(r))
+                ) return false;
+            else if(legit(s.charAt(l)) < 0) l++;
+            else if(legit(s.charAt(r)) < 0) r--;
+            else{
+                l++;
+                r--;
+            }
+        }
+        return true;
+        
+    }
+    public int legit(char ch){
+        if ((97 <= ch && ch <= 97 + 25) ||
+                (65 <= ch && ch <= 65 + 25) ||
+                (48 <= ch && ch <= 48 + 9)) {
+                return (65 <= ch && ch <= 65 + 25) ? (int) (ch + 32) : (int)ch;
+            }
+        return -1;
+
+    }
+}
+```
+```java
+class Solution {
+    public boolean isPalindrome(String s) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
