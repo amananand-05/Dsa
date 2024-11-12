@@ -615,9 +615,52 @@ class Solution {
 }
 ```
 
-### 21. []
+### 21. [151. Reverse Words in a String] https://leetcode.com/problems/reverse-words-in-a-string/description
 ```java
+class Solution {
+    public String reverseWords(String input_s) {
+        StringBuilder s = new StringBuilder(input_s);
+        int n = s.length();
+        int dataIndex = 0;
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if (ch != ' ')
+                s.setCharAt(dataIndex++, ch);
+            else if (ch == ' ' && (i > 0 && s.charAt(i - 1) != ' '))
+                s.setCharAt(dataIndex++, ch);
+        }
+        if (s.charAt(dataIndex - 1) == ' ')
+            dataIndex--;
+        int left = 0, r = dataIndex - 1;
+        reverse(s, left, dataIndex - 1);
+        left = 0;
+        for (int i = 0; i < dataIndex; i++) {
+            if (s.charAt(i) == ' ') {
+                s = reverse(s, left, i - 1);
+                left = i + 1;
+            }
+        }
+        s = reverse(s, left, dataIndex - 1);
+        return s.substring(0, dataIndex).toString();
+    }
 
+    public StringBuilder reverse(StringBuilder s, int l, int r) {
+        while (l < r) {
+            char ch = s.charAt(l);
+            s.setCharAt(l, s.charAt(r));
+            s.setCharAt(r, ch);
+            l++;
+            r--;
+        }
+        return s;
+    }
+}
+
+// trim spaces
+// reverse full string
+// reverse the words string
+// (words were in the reversed state due to the previous reverse)
+// return :)
 ```
 
 ### 22. []
