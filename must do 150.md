@@ -2,6 +2,8 @@
 
 
 ## Part A. Array / String
+
+---
 ### 1. [88. Merge Sorted Array] https://leetcode.com/problems/merge-sorted-array/description/
 ```java
 class Solution {
@@ -771,6 +773,9 @@ class Solution {
 }
 ```
 
+## Part B. Two Pointers
+
+---
 ### 25. [125. Valid Palindrome] https://leetcode.com/problems/valid-palindrome/description
 ```java
 class Solution {
