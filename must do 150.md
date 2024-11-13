@@ -864,9 +864,25 @@ class Solution {
 }
 ```
 
-### 28. []
+### 28. [11. Container With Most Water] https://leetcode.com/problems/container-with-most-water/description
 ```java
-
+class Solution {
+    public int maxArea(int[] height) {
+        int l = 0, r=height.length-1;
+        int maxWater = 0;
+        while(l<r){
+            maxWater = Math.max(maxWater, water(height,l,r));
+            if(height[l] <= height[r])
+                l++;
+            else
+                r--;
+        }
+        return maxWater;
+    }
+    public int water(int[] height, int l, int r){
+        return (r-l)*Math.min(height[l],height[r]);
+    }
+}
 ```
 
 ### 29. []
