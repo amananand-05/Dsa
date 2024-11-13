@@ -842,9 +842,26 @@ class Solution {
 }
 ```
 
-### 27. []
+### 27. [167. Two Sum II - Input Array Is Sorted] https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description
 ```java
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int l = 0, r = numbers.length - 1;
+        int[] res = new int[2];
+        while (l < r) {
+            if (numbers[l] + numbers[r] == target) {
+                res[0] = l + 1;
+                res[1] = r + 1;
+                return res;
+            } else if (numbers[l] + numbers[r] > target)
+                r--;
+            else
+                l++;
+        }
+        return res;
 
+    }
+}
 ```
 
 ### 28. []
