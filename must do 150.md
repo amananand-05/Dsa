@@ -929,6 +929,35 @@ class Solution {
 ```java
 
 ```
+```java
+// --- wrong solution [Time Limit Exceeded] [brute force]
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int minLength = 1;
+        int n = nums.length;
+        while (minLength <= n) {
+            int temp = 0;
+            int sum = 0;
+            while (temp < minLength) {
+                sum += nums[temp];
+                temp++;
+            }
+            if (sum >= target)
+                return minLength;
+            System.out.println(minLength + " " + sum);
+            while (temp < n) {
+                sum = sum + nums[temp] - nums[temp - minLength];
+                if (sum >= target)
+                    return minLength;
+                System.out.println(minLength + " " + sum);
+                temp++;
+            }
+            minLength++;
+        }
+        return 0;
+    }
+}
+```
 
 ### 31. []
 ```java
