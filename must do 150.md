@@ -927,7 +927,23 @@ class Solution {
 ---
 ### 30. [209. Minimum Size Subarray Sum] https://leetcode.com/problems/minimum-size-subarray-sum/description
 ```java
-
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        
+        int l=0;
+        int sum=0;
+        int minInterval = Integer.MAX_VALUE;
+        for(int r=0;r<nums.length;r++){
+            sum += nums[r];
+            while(sum>=target){
+                minInterval = Math.min(minInterval, r-l+1);
+                sum -= nums[l];
+                l++;
+            }
+        }
+        return Integer.MAX_VALUE != minInterval ? minInterval : 0;
+    }
+}
 ```
 ```java
 // --- wrong solution [Time Limit Exceeded] [brute force]
