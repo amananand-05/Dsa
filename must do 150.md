@@ -1141,9 +1141,69 @@ class Solution {
 }
 ```
 
-### 35. []
+### 35. [54. Spiral Matrix] https://leetcode.com/problems/spiral-matrix/description
+- medium
 ```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        if (matrix == null || matrix.length == 0) {
+            return result;
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int top = 0, bottom = rows - 1, left = 0, right = cols - 1;
+        while (top <= bottom && left <= right) {
+            for (int i = left; i <= right; i++) {
+                result.add(matrix[top][i]);
+            }
+            top++;
+            for (int i = top; i <= bottom; i++) {
+                result.add(matrix[i][right]);
+            }
+            right--;
+            if (top <= bottom) {
+                for (int i = right; i >= left; i--) {
+                    result.add(matrix[bottom][i]);
+                }
+                bottom--;
+            }
+            if (left <= right) {
+                for (int i = bottom; i >= top; i--) {
+                    result.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }       
+        return result;
+    }
+}
+```
+```java
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> li = new ArrayList<>();
+        int rows = matrix.length; // row 
+        int cols = matrix[0].length; // col 
 
+        int offSet = 0;
+        while(li.size() < rows*cols){
+            for(int i=0+offSet;i<cols-offSet && li.size() < rows*cols;i++)
+                li.add(matrix[0+offSet][i]);
+
+            for(int i=1+offSet;i<matrix.length-offSet && li.size() < rows*cols;i++)
+                li.add(matrix[i][cols-1-offSet]);
+
+            for(int i=cols-2-offSet;i>=0+offSet && li.size() < rows*cols;i--)
+                li.add(matrix[rows-1-offSet][i]);
+
+            for(int i=rows-2-offSet;i>=1+offSet && li.size() < rows*cols;i--)
+                li.add(matrix[i][0+offSet]);
+            offSet++;
+        }
+        return li;
+    }
+}
 ```
 
 ### 36. []
