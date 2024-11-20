@@ -39,4 +39,7 @@ space   32
 
 ```
 
+note:
+dsa 
+33 missing (from sliding window)
 
