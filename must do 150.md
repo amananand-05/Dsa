@@ -1018,8 +1018,60 @@ class Solution1 { // my sol
 }
 ```
 
-### 32. []
+### 32. [30. Substring with Concatenation of All Words] https://leetcode.com/problems/substring-with-concatenation-of-all-words/description
 ```java
+class Solution {
+    public List<Integer> findSubstring(String s, String[] words) {
+        List<Integer> result = new ArrayList<>();
+        if (s == null || s.length() == 0 || words == null || words.length == 0) {
+            return result;
+        }
+
+        // Create a frequency map for the words
+        HashMap<String, Integer> wordFreqMap = new HashMap<>();
+        for (String word : words) {
+            wordFreqMap.put(word, wordFreqMap.getOrDefault(word, 0) + 1);
+        }
+
+        int wordLen = words[0].length();
+        int wordCount = words.length;
+        int totalLen = wordLen * wordCount;
+        int n = s.length();
+
+        // Iterate over the first `wordLen` characters to cover all starting points
+        for (int i = 0; i < wordLen; i++) {
+            int left = i, right = i, count = 0;
+            HashMap<String, Integer> tempMap = new HashMap<>();
+
+            while (right + wordLen <= n) {
+                String word = s.substring(right, right + wordLen);
+                right += wordLen;
+
+                if (wordFreqMap.containsKey(word)) {
+                    tempMap.put(word, tempMap.getOrDefault(word, 0) + 1);
+                    count++;
+
+                    while (tempMap.get(word) > wordFreqMap.get(word)) {
+                        String leftWord = s.substring(left, left + wordLen);
+                        tempMap.put(leftWord, tempMap.get(leftWord) - 1);
+                        count--;
+                        left += wordLen;
+                    }
+
+                    if (count == wordCount) {
+                        result.add(left);
+                    }
+                } else {
+                    tempMap.clear();
+                    count = 0;
+                    left = right;
+                }
+            }
+        }
+
+        return result;
+    }
+}
 
 ```
 
