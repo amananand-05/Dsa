@@ -1234,9 +1234,84 @@ class Solution {
 }
 ```
 
-### 37. []
+### 37. [73. Set Matrix Zeroes] https://leetcode.com/problems/set-matrix-zeroes/description
+- medium
 ```java
+// O(m + n) space --------
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int m = matrix.length; // rows
+        int n = matrix[0].length; // cols 
+        int rowZero[] = new int[m];
+        int colZero[] = new int[n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(matrix[i][j] == 0){
+                    rowZero[i] = 1;
+                    colZero[j] = 1;
+                }
+            }
+        }
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(rowZero[i]==1 || colZero[j]==1){
+                    matrix[i][j]=0;
+                }
+            }
+        }
+    }
+}
+```
+```java
+// O(1) space --------
+class Solution {
+    public void setZeroes(int[][] m) {
+        int rows = m.length;
+        int cols = m[0].length;
+        boolean headRow = false;
+        boolean headCol = false;
 
+        for(int i=0;i<rows;i++){
+            if(m[i][0] == 0){
+                headCol = true;
+                break;
+            }
+        }
+        for(int i=0;i<cols;i++){
+            if(m[0][i] == 0){
+                headRow = true;
+                break;
+            }
+        }
+
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(m[i][j] == 0){
+                    m[i][0] = 1000;
+                    m[0][j] = 1000;
+                }
+            }
+        }
+        for(int i=1;i<rows;i++){
+            for(int j=1;j<cols;j++){
+                if(m[i][0] == 1000 || m[0][j] == 1000){
+                    m[i][j] = 0;
+                }
+            }
+        }
+
+        for(int i=0;i<rows;i++){
+            if(m[i][0] == 1000 || headCol){
+                m[i][0] = 0;
+            }
+        }
+        for(int i=0;i<cols;i++){
+            if(m[0][i] == 1000 || headRow){
+                m[0][i] = 0;
+            }
+        }
+    }
+}
 ```
 
 ### 38. []
