@@ -1019,6 +1019,7 @@ class Solution1 { // my sol
 ```
 
 ### 32. [30. Substring with Concatenation of All Words] https://leetcode.com/problems/substring-with-concatenation-of-all-words/description
+- hard
 ```java
 class Solution {
     public List<Integer> findSubstring(String s, String[] words) {
@@ -1075,14 +1076,69 @@ class Solution {
 
 ```
 
-### 33. []
+### 33. [76. Minimum Window Substring] https://leetcode.com/problems/minimum-window-substring/description
+- hard
 ```java
 
 ```
 
-### 34. []
-```java
+## Part D. Matrix
 
+### 34. [36. Valid Sudoku] https://leetcode.com/problems/valid-sudoku/description
+- medium
+```java
+class Solution {
+    public boolean isValidSudoku(char[][] board) {
+        int[] nums;
+
+        // (x,y)
+        // x-> row
+        // y-> col
+
+        // for rows
+        for (int i = 0; i < 9; i++) {
+            nums = new int[9];
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.')
+                    continue;
+                if (board[i][j] < 49 || 57 < board[i][j])
+                    return false;
+                nums[board[i][j] - 49] += 1;
+                if (nums[board[i][j] - 49] > 1)
+                    return false;
+            }
+        }
+        // for cols
+        // col and row can be done in the same array using two nums array and exchanging
+        // i and j
+        for (int i = 0; i < 9; i++) {
+            nums = new int[9];
+            for (int j = 0; j < 9; j++) {
+                if (board[j][i] == '.')
+                    continue;
+                nums[board[j][i] - 49] += 1;
+                if (nums[board[j][i] - 49] > 1)
+                    return false;
+            }
+        }
+        // for boxes
+        for (int i = 0; i < 9; i += 3) {
+            for (int j = 0; j < 9; j += 3) {
+                nums = new int[9];
+                for (int k = i; k < i + 3; k++) {
+                    for (int l = j; l < j + 3; l++) {
+                        if (board[k][l] == '.')
+                            continue;
+                        nums[board[k][l] - 49] += 1;
+                        if (nums[board[k][l] - 49] > 1)
+                            return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+}
 ```
 
 ### 35. []
