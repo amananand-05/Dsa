@@ -1264,6 +1264,7 @@ class Solution {
 ```
 ```java
 // O(1) space --------
+// considering 1000 any number x will never be in data
 class Solution {
     public void setZeroes(int[][] m) {
         int rows = m.length;
