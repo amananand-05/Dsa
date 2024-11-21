@@ -1425,6 +1425,7 @@ class Solution {
 }
 
 ```
+## Part E. Hashmap
 
 ### 39. []
 ```java
