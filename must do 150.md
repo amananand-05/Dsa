@@ -1315,8 +1315,114 @@ class Solution {
 }
 ```
 
-### 38. []
+### 38. [289. Game of Life] https://leetcode.com/problems/game-of-life/description
+- medium
 ```java
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int[][] boardRef = new int[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                boardRef[i][j] = board[i][j]; // Deep copy
+            }
+        }
+        for(int i = 0;i<boardRef.length;i++){
+            for(int j = 0; j<boardRef[0].length;j++){
+                boardRef[i][j] = getNeighborsCount(board,i,j);
+            }
+        }
+        for(int i = 0;i<boardRef.length;i++){
+            for(int j = 0; j<boardRef[0].length;j++){
+                if(boardRef[i][j] < 2)
+                    board[i][j] = 0;
+                else if(board[i][j] == 0 && boardRef[i][j] == 3)
+                    board[i][j] = 1;
+                else if(boardRef[i][j] > 3)
+                    board[i][j] = 0;
+            }
+        }
+    }
+    public int getNeighborsCount(int[][] board, int i,int j){
+        return 
+        getVal(board, i+1,j) +      //bottom
+        getVal(board, i-1,j-1) +    //topleft
+        getVal(board, i-1,j) +      //top
+        getVal(board, i-1,j+1) +    //topright
+        getVal(board, i,j-1) +      //left
+        getVal(board, i+1,j-1) +    //bottomleft
+        getVal(board, i,j+1) +      //right
+        getVal(board, i+1,j+1);     //bottomright
+    }
+    public int getVal(int[][] board, int i,int j){
+        try{
+            return board[i][j];
+        }catch(Exception e){
+            return 0;
+        }
+    }
+}
+```
+```java
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int rows = board.length, cols = board[0].length;
+
+        // Traverse each cell in the board
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int neighbors = getNeighborsCount(board, i, j);
+
+                // Encode the next state:
+                // - 01 (binary) represents the cell is currently dead and will stay dead.
+                // - 10 (binary) represents the cell is alive but will die.
+                // - 11 (binary) represents the cell is alive and will stay alive.
+                // - 00 (binary) represents the cell is dead and will stay dead.
+
+                // Rule 1 or Rule 3: Cell dies due to underpopulation or overpopulation
+                if (board[i][j] == 1 && (neighbors < 2 || neighbors > 3)) {
+                    board[i][j] = 1; // Encode 01 (binary), current 1 -> next 0
+                }
+                // Rule 4: Dead cell becomes alive by reproduction
+                else if (board[i][j] == 0 && neighbors == 3) {
+                    board[i][j] = 2; // Encode 10 (binary), current 0 -> next 1
+                }
+                // Rule 2: Cell stays alive with 2 or 3 neighbors
+                else if (board[i][j] == 1) {
+                    board[i][j] = 3; // Encode 11 (binary), current 1 -> next 1
+                }
+            }
+        }
+
+        // Finalize the board by extracting the next state
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                board[i][j] >>= 1; // Right shift to get the next state
+            }
+        }
+    }
+
+    private int getNeighborsCount(int[][] board, int row, int col) {
+        int rows = board.length, cols = board[0].length;
+        int count = 0;
+
+        // Directions for the 8 neighbors
+        int[][] directions = {
+            {-1, -1}, {-1, 0}, {-1, 1},
+            {0, -1},          {0, 1},
+            {1, -1}, {1, 0}, {1, 1}
+        };
+
+        for (int[] dir : directions) {
+            int newRow = row + dir[0], newCol = col + dir[1];
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+                // Check the least significant bit (current state)
+                count += board[newRow][newCol] & 1;
+            }
+        }
+
+        return count;
+    }
+}
 
 ```
 
