@@ -1444,9 +1444,43 @@ class Solution {
 }
 ```
 
-### 40. []
+### 40. [205. Isomorphic Strings] https://leetcode.com/problems/isomorphic-strings/description
 ```java
-
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] sIndex = new int[128];
+        int[] tIndex = new int[128];
+        for(int i=0;i<s.length();i++){
+            if(sIndex[s.charAt(i)]!=tIndex[t.charAt(i)])
+                return false;
+            sIndex[s.charAt(i)] = i+1;
+            tIndex[t.charAt(i)] = i+1;
+        }
+        return true;
+    }
+}
+```
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] ch = new int[128]; 
+        Arrays.fill(ch,-1);
+        if(s.length()  != t.length()) return false;
+        int n = s.length();
+        for(int i=0; i<n; i++){
+            if(ch[s.charAt(i)] != -1 && ch[s.charAt(i)] != t.charAt(i))
+                return false;
+            ch[s.charAt(i)] = t.charAt(i);
+        }
+        Arrays.fill(ch,-1);
+        for(int i=0; i<n; i++){
+            if(ch[t.charAt(i)] != -1 && ch[t.charAt(i)] != s.charAt(i))
+                return false;
+            ch[t.charAt(i)] = s.charAt(i);
+        }
+        return true;
+    }
+}
 ```
 
 ### 41. []
