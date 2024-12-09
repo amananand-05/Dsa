@@ -1507,9 +1507,23 @@ class Solution {
 }
 ```
 
-### 42. []
+### 42. [242. Valid Anagram] https://leetcode.com/problems/valid-anagram/description
 ```java
-
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length())
+            return false;
+        int[] freqMap = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            freqMap[s.charAt(i) - 97]++;
+            freqMap[t.charAt(i) - 97]--;
+        }
+        for (int i : freqMap)
+            if (i != 0)
+                return false;
+        return true;
+    }
+}
 ```
 
 ### 43. []
