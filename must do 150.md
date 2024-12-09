@@ -1526,9 +1526,31 @@ class Solution {
 }
 ```
 
-### 43. []
+### 43. [49. Group Anagrams] https://leetcode.com/problems/group-anagrams/description
 ```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> hm = new HashMap<>();
+        for (String s : strs) {
+            char[] chArr = s.toCharArray();
+            Arrays.sort(chArr);
+            String ind = String.valueOf(chArr);
+            if (hm.containsKey(ind))
+                hm.get(ind).add(s);
+            else {
+                ArrayList<String> al = new ArrayList<>();
+                al.add(s);
+                hm.put(ind, al);
+            }
+        }
+        List<List<String>> result = new ArrayList<>();
+        for (List<String> strList : hm.values()) {
+            result.add(strList);
+        }
+        return result;
 
+    }
+}
 ```
 
 ### 44. []
