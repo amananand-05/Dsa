@@ -1483,9 +1483,28 @@ class Solution {
 }
 ```
 
-### 41. []
+### 41. [290. Word Pattern] https://leetcode.com/problems/word-pattern/description
 ```java
-
+class Solution {
+    public boolean wordPattern(String pattern, String s) {
+        String[] sArr = s.split(" ");
+        if (pattern.length() != sArr.length)
+            return false;
+        Map<Character, String> m = new HashMap<>();
+        for (int i = 0; i < pattern.length(); i++) {
+            if (m.containsKey(pattern.charAt(i)) && !m.get(pattern.charAt(i)).equals(sArr[i]))
+                return false;
+            m.put(pattern.charAt(i), sArr[i]);
+        }
+        Map<String, Character> m2 = new HashMap<>();
+        for (int i = 0; i < pattern.length(); i++) {
+            if (m2.containsKey(sArr[i]) && !m2.get(sArr[i]).equals(pattern.charAt(i)))
+                return false;
+            m2.put(sArr[i], pattern.charAt(i));
+        }
+        return true;
+    }
+}
 ```
 
 ### 42. []
