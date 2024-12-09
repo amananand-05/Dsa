@@ -1569,9 +1569,30 @@ class Solution {
 }
 ```
 
-### 45. []
+### 45. [202. Happy Number] https://leetcode.com/problems/happy-number/description
 ```java
+class Solution {
+    public boolean isHappy(int n) {
+        HashMap<Integer, Integer> m = new HashMap<>();
+        while (n != 1) {
+            n = getSquareSum(n);
+            if (m.containsKey(n))
+                return false;
+            m.put(n, 1);
+        }
+        return true;
+    }
 
+    public int getSquareSum(int n) {
+        int sum = 0;
+        while (n != 0) {
+            int rem = n % 10;
+            sum += rem * rem;
+            n /= 10;
+        }
+        return sum;
+    }
+}
 ```
 
 ### 46. []
