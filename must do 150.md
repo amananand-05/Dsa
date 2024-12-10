@@ -1610,9 +1610,21 @@ class Solution {
 }
 ```
 
-### 47. []
+### 47. [128. Longest Consecutive Sequence] https://leetcode.com/problems/longest-consecutive-sequence/description
 ```java
-
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        Arrays.sort(nums);
+        Map<Integer, Integer> m = new HashMap<>();
+        int result = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int temp = m.getOrDefault(nums[i] - 1, 0) + 1;
+            m.put(nums[i], temp);
+            result = Math.max(result, temp);
+        }
+        return result;
+    }
+}
 ```
 
 ### 48. []
