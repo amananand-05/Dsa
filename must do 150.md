@@ -1627,9 +1627,63 @@ class Solution {
 }
 ```
 
-### 48. []
+### 48. [228. Summary Ranges] https://leetcode.com/problems/summary-ranges/description
 ```java
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
 
+        int start = nums[0];
+
+        for (int i = 1; i <= nums.length; i++) {
+            // Check if the current number is not part of the current range or we've reached the end.
+            if (i == nums.length || nums[i] != nums[i - 1] + 1) {
+                // Add the range to the result
+                if (start == nums[i - 1]) {
+                    result.add(String.valueOf(start));
+                } else {
+                    result.add(start + "->" + nums[i - 1]);
+                }
+                // Update the start for the next range
+                if (i < nums.length) {
+                    start = nums[i];
+                }
+            }
+        }
+        
+        return result;
+    }
+}
+
+```
+```java
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        if (nums.length == 0)
+            return result;
+        int start = nums[0], end = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1] + 1) {
+                end = nums[i];
+            } else {
+                if (start == end)
+                    result.add(String.valueOf(start));
+                else
+                    result.add(start + "->" + end);
+                start = end = nums[i];
+            }
+        }
+        if (start == end)
+            result.add(String.valueOf(start));
+        else
+            result.add(start + "->" + end);
+        return result;
+    }
+}
 ```
 
 ### 49. []
