@@ -9,7 +9,21 @@ Arrays.sort(nums); // Sort the array
 ```java 
  char[] tArray = t.toCharArray();
         Arrays.sort(sArray);
+        Arrays.sort(numbers, (a, b) -> b - a); // Sort in descending order
 
+
+        String[] words = {"banana", "apple", "cherry"};
+        Arrays.sort(words, (a, b) -> b.compareTo(a));
+
+
+
+int[][] array = {
+        {3, 2},
+        {1, 5},
+        {4, 0}
+};
+
+        Arrays.sort(array, (a, b) -> Integer.compare(a[0], b[0])); // Sort by first column
 ```
 ```java 
 import java.util.Random;
