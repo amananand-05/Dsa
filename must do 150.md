@@ -1750,9 +1750,84 @@ class Solution {
 }
 ```
 
-### 50. []
+### 50. [57. Insert Interval] https://leetcode.com/problems/insert-interval/description
 ```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList<>();
+
+        int i = 0;
+        int n = intervals.length;
+
+        // Step 1: Add all intervals before the new interval
+        while (i < n && intervals[i][1] < newInterval[0]) {
+            result.add(intervals[i]);
+            i++;
+        }
+
+        // Step 2: Merge overlapping intervals
+        int[] mergedInterval = newInterval;
+        while (i < n && intervals[i][0] <= mergedInterval[1]) {
+            mergedInterval[0] = Math.min(mergedInterval[0], intervals[i][0]);
+            mergedInterval[1] = Math.max(mergedInterval[1], intervals[i][1]);
+            i++;
+        }
+        result.add(mergedInterval);
+
+        // Step 3: Add all intervals after the new interval
+        while (i < n) {
+            result.add(intervals[i]);
+            i++;
+        }
+
+        // Convert result list to 2D array
+        return result.toArray(new int[result.size()][]);
+    }
+}
+
+```
+```java
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        int[][] temp = new int[intervals.length+1][2];
+        int k = 0;
+        for (k=0;k<intervals.length;k++){
+            temp[k][0] = intervals[k][0];
+            temp[k][1] = intervals[k][1];
+        } 
+        temp[k][0] = newInterval[0];
+        temp[k][1] = newInterval[1];
+        intervals = temp;
+
+        ArrayList<Pair<Integer, Integer>> li = new ArrayList<>();
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        if (intervals.length == 0)
+            return new int[][] {};
+        Pair<Integer, Integer> curr = new Pair(intervals[0][0], intervals[0][1]);
+        if (intervals.length == 1)
+            li.add(curr);
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] > curr.getValue()) {
+                li.add(curr);
+                curr = new Pair(intervals[i][0], intervals[i][1]);
+            } else {
+                curr = new Pair<>(Math.min(curr.getKey(), intervals[i][0]), Math.max(curr.getValue(), intervals[i][1]));
+            }
+            if (i == intervals.length - 1)
+                li.add(curr);
+        }
+        int[][] result = new int[li.size()][2];
+        for (int i = 0; i < li.size(); i++) {
+            result[i][0] = li.get(i).getKey();
+            result[i][1] = li.get(i).getValue();
+        }
+        return result;
+    }
+}
 ```
 
 ### 51. []
