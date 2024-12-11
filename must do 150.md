@@ -1686,9 +1686,68 @@ class Solution {
 }
 ```
 
-### 49. []
+### 49. [56. Merge Intervals] https://leetcode.com/problems/merge-intervals/description
 ```java
+import java.util.*;
 
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) return new int[0][0];
+
+        // Sort intervals by the start time
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+        List<int[]> merged = new ArrayList<>();
+        int[] current = intervals[0];
+
+        for (int i = 1; i < intervals.length; i++) {
+            // If intervals overlap, merge them
+            if (intervals[i][0] <= current[1]) {
+                current[1] = Math.max(current[1], intervals[i][1]);
+            } else {
+                // No overlap, add current interval to result and update
+                merged.add(current);
+                current = intervals[i];
+            }
+        }
+
+        // Add the last interval
+        merged.add(current);
+
+        // Convert the result list to a 2D array
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
+
+```
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        ArrayList<Pair<Integer, Integer>> li = new ArrayList<>();
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        if (intervals.length == 0)
+            return new int[][] {};
+        Pair<Integer, Integer> curr = new Pair(intervals[0][0], intervals[0][1]);
+        if (intervals.length == 1)
+            li.add(curr);
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] > curr.getValue()) {
+                li.add(curr);
+                curr = new Pair(intervals[i][0], intervals[i][1]);
+            } else {
+                curr = new Pair<>(Math.min(curr.getKey(), intervals[i][0]), Math.max(curr.getValue(), intervals[i][1]));
+            }
+            if (i == intervals.length - 1)
+                li.add(curr);
+        }
+        int[][] result = new int[li.size()][2];
+        for (int i = 0; i < li.size(); i++) {
+            result[i][0] = li.get(i).getKey();
+            result[i][1] = li.get(i).getValue();
+        }
+        return result;
+    }
+}
 ```
 
 ### 50. []
