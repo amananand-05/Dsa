@@ -2081,7 +2081,19 @@ public class Solution {
 
 ```
 ```java
-
+// slow sol using hashing, because of .contains() method call for searching the hash
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> visited = new HashSet<>();
+        ListNode itr = head;
+        while(itr != null){
+            if(visited.contains(itr)) return true;
+            visited.add(itr);
+            itr = itr.next;
+        }
+        return false;
+    }
+}
 ```
 
 ### 58. []
