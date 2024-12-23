@@ -1963,9 +1963,40 @@ class MinStack {
  */
 ```
 
-### 55. []
+### 55. [150. Evaluate Reverse Polish Notation] https://leetcode.com/problems/evaluate-reverse-polish-notation/description
 ```java
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st = new Stack<>();
+        for (String token : tokens)
+            if (token.equals("+") ||
+                    token.equals("-") ||
+                    token.equals("*") ||
+                    token.equals("/"))
+                st.push(operate(st.pop(), st.pop(), token));
+            else
+                st.push(Integer.valueOf(token));
+        return st.peek();
+    }
 
+    int operate(int a, int b, String opr) {
+        switch (opr) {
+            case "+":
+                return b + a;
+            case "-":
+                return b - a;
+            case "/":
+                if (a == 0) {
+                    throw new ArithmeticException("Division by zero is not allowed.");
+                }
+                return b / a;
+            case "*":
+                return b * a;
+            default:
+                throw new IllegalArgumentException("Invalid operator: " + opr);
+        }
+    }
+}
 ```
 
 ### 56. []
