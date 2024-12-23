@@ -2096,8 +2096,43 @@ public class Solution {
 }
 ```
 
-### 58. []
+### 58. [2. Add Two Numbers] https://leetcode.com/problems/add-two-numbers/description
 ```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // Dummy node to simplify handling of the result list
+        ListNode res = new ListNode(0);
+        ListNode head = res; // Pointer to keep track of the result's head
+        int carry = 0;
+
+        // Process both lists until both are null
+        while (l1 != null || l2 != null) {
+            int val1 = (l1 != null) ? l1.val : 0; // Get the value from l1, or 0 if null
+            int val2 = (l2 != null) ? l2.val : 0; // Get the value from l2, or 0 if null
+
+            // Calculate the sum and carry
+            int currSum = val1 + val2 + carry;
+            carry = currSum / 10; // Calculate carry for the next digit
+            currSum = currSum % 10; // Get the current digit
+
+            // Append the current digit to the result list
+            res.next = new ListNode(currSum);
+            res = res.next; // Move the result pointer forward
+
+            // Move l1 and l2 pointers forward if not null
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+
+        // If there is a carry left, add it as a new node
+        if (carry > 0) {
+            res.next = new ListNode(carry);
+        }
+
+        // Return the head of the resulting list
+        return head.next;
+    }
+}
 
 ```
 
