@@ -2136,9 +2136,33 @@ class Solution {
 
 ```
 
-### 59. []
+### 59. [21. Merge Two Sorted Lists] https://leetcode.com/problems/merge-two-sorted-lists/description
 ```java
-
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        ListNode res = new ListNode(0);
+        ListNode result = res;
+        while (list1 != null && list2 != null) {
+            res.next = new ListNode(list1.val <= list2.val ? list1.val : list2.val);
+            if (list1.val <= list2.val)
+                list1 = list1.next;
+            else
+                list2 = list2.next;
+            res = res.next;
+        }
+        while (list1 != null) {
+            res.next = new ListNode(list1.val);
+            list1 = list1.next;
+            res = res.next;
+        }
+        while (list2 != null) {
+            res.next = new ListNode(list2.val);
+            list2 = list2.next;
+            res = res.next;
+        }
+        return result.next;
+    }
+}
 ```
 
 ### 60. []
