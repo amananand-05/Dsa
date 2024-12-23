@@ -1999,9 +1999,54 @@ class Solution {
 }
 ```
 
-### 56. []
+### 56. [224. Basic Calculator] https://leetcode.com/problems/basic-calculator/description
 ```java
+class Solution {
+    public int calculate(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int num = 0;
+        int result = 0; // The overall result
+        int sign = 1;   // 1 represents '+', -1 represents '-'
 
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (Character.isDigit(c)) {
+                // Build the current number
+                num = num * 10 + (c - '0');
+            } else if (c == '+') {
+                // Apply the previous number and reset
+                result += sign * num;
+                num = 0;
+                sign = 1; // Current sign is '+'
+            } else if (c == '-') {
+                // Apply the previous number and reset
+                result += sign * num;
+                num = 0;
+                sign = -1; // Current sign is '-'
+            } else if (c == '(') {
+                // Push the current result and sign onto the stack
+                stack.push(result);
+                stack.push(sign);
+                // Reset result and sign for the new expression inside parentheses
+                result = 0;
+                sign = 1;
+            } else if (c == ')') {
+                // Apply the last number before the closing parenthesis
+                result += sign * num;
+                num = 0;
+                // Multiply by the sign before the parentheses 
+                //and add to the result before the parentheses
+                result *= stack.pop(); // Pop the sign
+                result += stack.pop(); // Pop the result
+            }
+        }
+
+        // Apply the last number
+        result += sign * num;
+        return result;
+    }
+}
 ```
 
 ### 57. []
