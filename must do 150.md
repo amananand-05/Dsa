@@ -1899,9 +1899,26 @@ class Solution {
  }
 ```
 
-### 53. []
+### 53. [71. Simplify Path] https://leetcode.com/problems/simplify-path/description
 ```java
-
+class Solution {
+    public String simplifyPath(String path) {
+        String[] pathArr = path.split("/");
+        Stack<String> st = new Stack<>();
+        for (String fragment : pathArr) {
+            if (fragment.equals("..")) {
+                if (!st.isEmpty())
+                    st.pop();
+            } else if (!fragment.equals(".") && !fragment.equals(""))
+                st.push(fragment);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (String str : st) {
+            sb.append("/").append(str);
+        }
+        return sb.length() > 0 ? sb.toString() : "/";
+    }
+}
 ```
 
 ### 54. []
