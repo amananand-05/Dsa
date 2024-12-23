@@ -2048,8 +2048,38 @@ class Solution {
     }
 }
 ```
+# Part H. Linked List
 
-### 57. []
+### 57. [141. Linked List Cycle] https://leetcode.com/problems/linked-list-cycle/description
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // Initialize two pointers, `fast` and `slow`, both starting at the head of the list.
+        ListNode fast = head;
+        ListNode slow = head;
+
+        // If the list is empty (`head == null`), there can't be a cycle.
+        if (head == null)
+            return false;
+
+        // Traverse the list with two pointers: 
+        // - `slow` moves one step at a time
+        // - `fast` moves two steps at a time
+        while (fast != null && fast.next != null) {
+            slow = slow.next;           // Move `slow` one step forward.
+            fast = fast.next.next;      // Move `fast` two steps forward.
+
+            // If `slow` and `fast` meet, it means there is a cycle in the list.
+            if (slow == fast) return true;
+        }
+
+        // If `fast` reaches the end of the list (`fast == null` or `fast.next == null`),
+        // the list has no cycle.
+        return false;
+    }
+}
+
+```
 ```java
 
 ```
