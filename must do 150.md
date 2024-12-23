@@ -1,7 +1,7 @@
 # Top Interview 150 LC
 
 
-## Part A. Array / String
+# Part A. Array / String
 
 ---
 ### 1. [88. Merge Sorted Array] https://leetcode.com/problems/merge-sorted-array/description/
@@ -773,7 +773,7 @@ class Solution {
 }
 ```
 
-## Part B. Two Pointers
+# Part B. Two Pointers
 
 ---
 ### 25. [125. Valid Palindrome] https://leetcode.com/problems/valid-palindrome/description
@@ -922,7 +922,7 @@ class Solution {
 }
 ```
 
-## Part C. Sliding Window
+# Part C. Sliding Window
 
 ---
 ### 30. [209. Minimum Size Subarray Sum] https://leetcode.com/problems/minimum-size-subarray-sum/description
@@ -1082,7 +1082,7 @@ class Solution {
 
 ```
 
-## Part D. Matrix
+# Part D. Matrix
 
 ### 34. [36. Valid Sudoku] https://leetcode.com/problems/valid-sudoku/description
 - medium
@@ -1425,7 +1425,7 @@ class Solution {
 }
 
 ```
-## Part E. Hashmap
+# Part E. Hashmap
 
 ### 39. [383. Ransom Note] https://leetcode.com/problems/ransom-note/description
 ```java
@@ -1626,6 +1626,7 @@ class Solution {
     }
 }
 ```
+# Part F. Intervals
 
 ### 48. [228. Summary Ranges] https://leetcode.com/problems/summary-ranges/description
 ```java
@@ -1853,9 +1854,49 @@ class Solution {
 }
 ```
 
-### 52. []
-```java
+# Part G. Stack
 
+### 52. [20. Valid Parentheses] https://leetcode.com/problems/valid-parentheses/description
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            Character ch = s.charAt(i);
+            if(ch == '(' || ch == '{' || ch == '[')
+                st.push(ch);
+            else if(st.isEmpty())
+                return false;
+            else if(
+                (ch == ')' && st.pop() != '(') ||
+                (ch == '}' && st.pop() != '{') ||
+                (ch == ']' && st.pop() != '[')
+            ) 
+            return false;
+        }
+        return st.isEmpty();
+    }
+}
+```
+```java
+// same sol
+ class Solution {
+     public boolean isValid(String s) {
+         Stack<Character> st = new Stack<>();
+         for(int i =0;i<s.length();i++){
+             if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[')
+                 st.push(s.charAt(i));
+             else{
+                 if(st.isEmpty()) return false;
+                 Character ch = st.pop();
+                 if(s.charAt(i) == ')' && ch != '(') return false;
+                 if(s.charAt(i) == '}' && ch != '{') return false;
+                 if(s.charAt(i) == ']' && ch != '[') return false;
+             } 
+         }
+         return st.isEmpty();   
+     }
+ }
 ```
 
 ### 53. []
