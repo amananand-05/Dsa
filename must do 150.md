@@ -2752,9 +2752,34 @@ class Solution {
 ```
 
 
-### x6. []
+### x6. [201. Bitwise AND of Numbers Range] https://leetcode.com/problems/bitwise-and-of-numbers-range/description
+```java
+// please look for an explanation was confused at the moment
+class Solution {
+    public int rangeBitwiseAnd(int left, int right) {
+        // Shift left and right until they are equal, keeping track of the shift count
+        int shift = 0;
+        while (left < right) {
+            left >>= 1;
+            right >>= 1;
+            shift++;
+        }
+        // Shift the common prefix back to its original position
+        return left << shift;
+    }
+}
+```
 ```java
 
+// Time Limit Exceeded - X solution for large range
+class Solution {
+    public int rangeBitwiseAnd(int left, int right) {
+        int result = left;
+        for (int i = left+1; i <= right; i++)
+            result &= i;
+        return result;
+    }
+}
 ```
 
 
