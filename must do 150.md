@@ -2622,3 +2622,78 @@ class Solution {
 
 
 
+
+# Part XX. Bit Manipulation
+
+### x1. [67. Add Binary] https://leetcode.com/problems/add-binary/description
+```java
+class Solution {
+        public static String addBinary(String a, String b) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+        
+        // Start from the end of both strings
+        int i = a.length() - 1, j = b.length() - 1;
+        
+        while (i >= 0 || j >= 0 || carry > 0) {
+            int bitA = (i >= 0) ? a.charAt(i--) - '0' : 0; // Get bit from a or 0
+            int bitB = (j >= 0) ? b.charAt(j--) - '0' : 0; // Get bit from b or 0
+            
+            // Binary addition with carry
+            int sum = bitA + bitB + carry;
+            result.append(sum % 2); // Append the current bit
+            carry = sum / 2;        // Update the carry
+        }
+        
+        return result.reverse().toString(); // Reverse to get the correct result
+    }
+}
+```
+```java
+// it will not work for very large numbers 
+
+     public String addBinary(String a, String b) {
+         // Convert binary strings to integers
+         int num1 = Integer.parseUnsignedInt(a, 2);
+         int num2 = Integer.parseUnsignedInt(b, 2);
+
+         // Perform addition using bit manipulation
+         while (num2 != 0) {
+             int sum = num1 ^ num2; // XOR for sum without carry
+             int carry = (num1 & num2) << 1; // AND for carry, then shift left
+             num1 = sum;
+             num2 = carry;
+         }
+
+         // Convert the result back to binary string
+         return Integer.toBinaryString(num1);
+     }
+```
+
+### x2. []
+```java
+
+```
+
+### x3. []
+```java
+
+```
+
+### x4. []
+```java
+
+```
+
+### x5. []
+```java
+
+```
+
+### x6. []
+```java
+
+```
+
+
+
