@@ -2165,9 +2165,72 @@ class Solution {
 }
 ```
 
-### 60. []
+### 60. [138. Copy List with Random Pointer] https://leetcode.com/problems/copy-list-with-random-pointer/description
 ```java
 
+class Solution {
+    public Node copyRandomList(Node head) {
+
+        Node curr = head;
+        // Step 1: Create new nodes and interweave them with original nodes
+        // adding a node next to every node but with random point to nohing (null)
+        while(curr != null){
+            Node copy = new Node(curr.val);
+            copy.next = curr.next;
+            curr.next = copy;
+            curr = copy.next;
+        }
+        curr = head;
+        // Step 2: Assign random pointers for the copied nodes
+        // fixing the random pointer
+        while(curr != null){
+            if(curr.random != null){
+                curr.next.random = curr.random.next;
+            }
+            curr = curr.next.next;
+        }
+        Node result = new Node(0);
+        Node rCurr = result;
+        curr = head;
+        // Step 3: Separate the original and copied list
+        while(curr != null){
+            rCurr.next = curr.next;
+            rCurr = rCurr.next;
+
+            curr.next = rCurr.next; // Restore original list
+            curr = curr.next;
+        }
+        return result.next;
+    }
+}
+```
+```java
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) return null;
+
+        // Map to store the original node -> copied node mapping
+        Map<Node, Node> map = new HashMap<>();
+
+        // First pass: Create all nodes and map them
+        Node current = head;
+        while (current != null) {
+            map.put(current, new Node(current.val));
+            current = current.next;
+        }
+
+        // Second pass: Update next and random pointers
+        current = head;
+        while (current != null) {
+            map.get(current).next = map.get(current.next); // Set next
+            map.get(current).random = map.get(current.random); // Set random
+            current = current.next;
+        }
+
+        return map.get(head);
+    }
+}
+//hashmap time O(n), space O(n)
 ```
 
 ### 61. []
