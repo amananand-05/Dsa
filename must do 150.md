@@ -2670,14 +2670,33 @@ class Solution {
      }
 ```
 
-### x2. []
+### x2. [190. Reverse Bits] https://leetcode.com/problems/reverse-bits/description
 ```java
-
+public class Solution {
+    // you need treat n as an unsigned value
+    public int reverseBits(int n) {
+        int result=0;
+        for(int i=0; i<32; i++){
+            result = (result << 1) | (n & 1);
+            n >>>= 1;
+        }
+        return result;
+    }
+}
 ```
 
-### x3. []
+### x3. [191. Number of 1 Bits] https://leetcode.com/problems/number-of-1-bits/description
 ```java
-
+class Solution {
+    public int hammingWeight(int n) {
+        int count = 0;
+        while(n>0){
+            count += n & 1;
+            n = n >> 1 ;
+        }
+        return count;
+    }
+}
 ```
 
 ### x4. []
