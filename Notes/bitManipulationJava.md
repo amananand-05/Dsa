@@ -159,3 +159,94 @@ Bit manipulation is a technique that allows you to perform operations directly o
     - Formula: `a ^= b; b ^= a; a ^= b;`
 
 ---
+
+## Signed values can be represented in binary using **two's complement representation**, which is the most common method in modern computing.
+
+---
+
+### **Two's Complement Representation**
+
+1. **For Positive Numbers**:
+   - The binary representation is the same as the unsigned value.
+   - The **most significant bit (MSB)** is `0`, indicating a positive number.
+
+2. **For Negative Numbers**:
+   - Take the binary representation of the absolute value.
+   - Invert all the bits (**1's complement**).
+   - Add `1` to the inverted binary (**2's complement**).
+   - The MSB is `1`, indicating a negative number.
+
+---
+
+### **Steps to Represent a Signed Integer**
+
+#### Example: Representing `-5` in an 8-bit binary number
+1. Start with the binary representation of `5`:
+   ```
+   00000101
+   ```
+
+2. Invert all bits (1's complement):
+   ```
+   11111010
+   ```
+
+3. Add `1` to the result (2's complement):
+   ```
+   11111010 + 1 = 11111011
+   ```
+
+Thus, `-5` in 8-bit two's complement form is:
+```
+11111011
+```
+
+---
+
+### **Verifying Two's Complement**
+To verify, convert the binary representation of `11111011` back to decimal:
+1. The MSB is `1`, so it's negative.
+2. Invert the bits:
+   ```
+   11111011 → 00000100
+   ```
+
+3. Add `1`:
+   ```
+   00000100 + 1 = 00000101 (5 in decimal)
+   ```
+
+4. Add the negative sign:
+   ```
+   -5
+   ```
+
+---
+
+### **Range of Signed Integers**
+For an **n-bit signed integer**, the range is:
+```
+-(2^(n-1)) to (2^(n-1) - 1)
+```
+
+#### Example:
+For an 8-bit integer:
+- Minimum: `-128` (`10000000` in binary)
+- Maximum: `127` (`01111111` in binary)
+
+---
+
+### **Sign Extension**
+When extending a signed binary number to a larger size, the sign bit is propagated (preserved). For example:
+- Extending `-5` (`11111011` in 8 bits) to 16 bits:
+  ```
+  11111111 11111011
+  ```
+
+---
+
+### **Applications**
+- Efficient arithmetic operations, especially subtraction and comparisons.
+- Negative number representation simplifies hardware design.
+
+Would you like more examples or details on operations using signed binary numbers?
