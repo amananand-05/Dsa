@@ -2711,10 +2711,46 @@ class Solution {
 }
 ```
 
-### x5. []
+### x5. [137. Single Number II] https://leetcode.com/problems/single-number-ii/description
 ```java
-
+// please look for an explanation was confused at the moment
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ones = 0;
+        int twos = 0;
+        for (int num : nums) {
+            ones = ones ^ num & ~twos;
+            twos = twos ^ num & ~ones;
+        }
+        return ones;
+    }
+}
 ```
+```java
+class Solution {
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        // Iterate through all 32 bit positions
+        for (int i = 0; i < 32; i++) {
+            int temp = (1 << i); // Bit mask for the ith bit
+            int oneCount = 0;
+            // Count how many numbers have the ith bit set
+            for (int num : nums) {
+                if ((num & temp) != 0) {
+                    oneCount++;
+                }
+            }
+            // If the count of 1's for this bit is not divisible by 3,
+            // it means the single number has this bit set
+            if (oneCount % 3 != 0) {
+                result |= temp;
+            }
+        }
+        return result;
+    }
+}
+```
+
 
 ### x6. []
 ```java
