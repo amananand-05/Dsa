@@ -2235,7 +2235,70 @@ class Solution {
 
 ### 61. []
 ```java
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if (head == null || left == right) return head; // No reversal needed
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prev = dummy;
 
+        // Move `prev` to the node before the sublist
+        for (int i = 1; i < left; i++) {
+            prev = prev.next;
+        }
+
+        // Start reversing the sublist
+        ListNode curr = prev.next;
+        ListNode next = null;
+        ListNode prevSublist = null;
+
+        for (int i = 0; i < right - left + 1; i++) {
+            next = curr.next;
+            curr.next = prevSublist;
+            prevSublist = curr;
+            curr = next;
+        }
+
+        // Reconnect the reversed sublist with the rest of the list
+        prev.next.next = curr; // Reconnect the tail of the sublist
+        prev.next = prevSublist; // Reconnect the head of the sublist
+
+        return dummy.next;
+    }
+}
+
+```
+```java
+//with O(n) space
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        int[] ref = new int[right - left + 1];
+        ListNode curr = head;
+        int counter = 1;
+        while (curr != null) {
+            if (left <= counter && counter <= right)
+                ref[counter - left] = curr.val;
+            curr = curr.next;
+            counter++;
+        }
+        for (int i = 0; i < ref.length / 2; i++) {
+            ref[i] = ref[ref.length - i - 1] ^ ref[i];
+            ref[ref.length - i - 1] = ref[i] ^ ref[ref.length - i - 1];
+            ref[i] = ref[i] ^ ref[ref.length - i - 1];
+        }
+
+        curr = head;
+        counter = 1;
+        while (curr != null) {
+            if (left <= counter && counter <= right)
+                curr.val = ref[counter - left];
+            curr = curr.next;
+            counter++;
+        }
+        return head;
+    }
+}
 ```
 
 ### 62. []
