@@ -2233,7 +2233,7 @@ class Solution {
 //hashmap time O(n), space O(n)
 ```
 
-### 61. []
+### 61. [92. Reverse Linked List II] https://leetcode.com/problems/reverse-linked-list-ii/description
 ```java
 class Solution {
     public ListNode reverseBetween(ListNode head, int left, int right) {
