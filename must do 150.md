@@ -2301,39 +2301,47 @@ class Solution {
 }
 ```
 
-### 62. []
+### 62. [25. Reverse Nodes in k-Group]
 ```java
 
 ```
 
-### 63. []
+### 63. [19. Remove Nth Node From End of List]
 ```java
 
 ```
 
-### 64. []
+### 64. [82. Remove Duplicates from Sorted List II]
 ```java
 
 ```
 
-### 65. []
+### 65. [61. Rotate List]
 ```java
 
 ```
 
-### 66. []
+### 66. [86. Partition List]
 ```java
 
 ```
 
-### 67. []
+### 67. [146. LRU Cache]
 ```java
 
 ```
 
-### 68. []
-```java
+# Part I. Binary Tree General
 
+### 68. [104. Maximum Depth of Binary Tree] https://leetcode.com/problems/maximum-depth-of-binary-tree/description
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
+}
 ```
 
 ### 69. []
@@ -2907,6 +2915,38 @@ class Solution {
     }
 }
 ```
+
+# Part XX. 
+
+### x1. []
+```java
+
+```
+### x2. []
+```java
+
+```
+### x3. []
+```java
+
+```
+### x4. []
+```java
+
+```
+### x5. []
+```java
+
+```
+### x6. []
+```java
+
+```
+### x7. []
+```java
+
+```
+
 
 
 
